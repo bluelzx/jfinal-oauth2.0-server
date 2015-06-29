@@ -6,15 +6,13 @@ package cn.zhucongqi.oauth2.message;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import cn.zhucongqi.oauth2.consts.OAuth;
 import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
-import cn.zhucongqi.oauth2.parameters.BodyURLEncodedParametersApplier;
-import cn.zhucongqi.oauth2.parameters.FragmentParametersApplier;
 import cn.zhucongqi.oauth2.parameters.JSONBodyParametersApplier;
 import cn.zhucongqi.oauth2.parameters.OAuthParametersApplier;
-import cn.zhucongqi.oauth2.parameters.QueryParameterApplier;
-import cn.zhucongqi.oauth2.parameters.WWWAuthHeaderParametersApplier;
 
 /**
  * 
@@ -40,6 +38,10 @@ public class OAuthResponse implements OAuthMessage {
 
     public static OAuthErrorResponseBuilder errorResponse(int code) {
         return new OAuthErrorResponseBuilder(code);
+    }
+    
+    public static OAuthErrorResponseBuilder errorBadReqResponse() {
+        return new OAuthErrorResponseBuilder(HttpServletResponse.SC_BAD_REQUEST);
     }
 
     @Override
@@ -112,36 +114,12 @@ public class OAuthResponse implements OAuthMessage {
             return this;
         }
 
-        public OAuthResponse buildQueryMessage() {
-            OAuthResponse msg = new OAuthResponse(location, responseCode);
-            this.applier = new QueryParameterApplier();
-
-            if (parameters.containsKey(OAuth.OAUTH_ACCESS_TOKEN)) {
-            	this.applier = new FragmentParametersApplier();
-            }else{
-            	this.applier = new QueryParameterApplier();
-            }
-            
-            return (OAuthResponse)applier.applyOAuthParameters(msg, parameters);
-        }
-
-        public OAuthResponse buildBodyMessage() {
-            OAuthResponse msg = new OAuthResponse(location, responseCode);
-            this.applier = new BodyURLEncodedParametersApplier();
-            return (OAuthResponse)applier.applyOAuthParameters(msg, parameters);
-        }
-
         public OAuthResponse buildJSONMessage() {
             OAuthResponse msg = new OAuthResponse(location, responseCode);
             this.applier = new JSONBodyParametersApplier();
             return (OAuthResponse)applier.applyOAuthParameters(msg, parameters);
         }
 
-        public OAuthResponse buildHeaderMessage() {
-            OAuthResponse msg = new OAuthResponse(location, responseCode);
-            this.applier = new WWWAuthHeaderParametersApplier();
-            return (OAuthResponse)applier.applyOAuthParameters(msg, parameters);
-        }
     }
 
     public static class OAuthErrorResponseBuilder extends OAuthResponseBuilder {

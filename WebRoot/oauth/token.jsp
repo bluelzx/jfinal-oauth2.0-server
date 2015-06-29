@@ -10,6 +10,7 @@
 <form action="<%=request.getContextPath()%>/oauth2/access_token" method="post">
 <input type="hidden" value="token" name="response_type"/>
 <input type="text" value="" name="client_id"/>
+<input type="hidden" value="stateasadas" name="state"/>
 <input type="submit" value="token"/>
 </form>
 </body>

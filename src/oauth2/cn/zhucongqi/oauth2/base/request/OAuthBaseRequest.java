@@ -51,6 +51,7 @@ public abstract class OAuthBaseRequest {
                 if (StrKit.notBlank(redirectUri)) {
                     e.setRedirectUri(redirectUri);
                 }
+                e.state(this.getState());
             } catch (Exception ex) {
             }
 
@@ -92,6 +93,10 @@ public abstract class OAuthBaseRequest {
     public boolean isClientAuthHeaderUsed() {
         return OAuthKit.decodeClientAuthenticationHeader(request.getHeader(OAuth.HeaderType.AUTHORIZATION)) != null;
     }
+
+	public String getState() {
+		return getParam(OAuth.OAUTH_STATE);
+	}
 
     public Set<String> getScopes() {
         String scopes = getParam(OAuth.OAUTH_SCOPE);

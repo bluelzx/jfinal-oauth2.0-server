@@ -16,6 +16,7 @@ username : <input type="text" value="" name="username"/> <br/>
 password :<input type="text" value="" name="password"/> <br/>
 client_id :　<input type="text" value="" name="client_id"/> <br/>
 client_secret : <input type="text" value="" name="client_secret"/>
+<input type="hidden" value="stateasadas" name="state"/>
 <input type="submit" value="token"/>
 </form>
 </body>

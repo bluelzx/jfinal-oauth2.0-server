@@ -50,10 +50,6 @@ public class OAuthRequest extends OAuthBaseRequest {
 		return Duang.duang(clazz);
 	}
 
-	public String getState() {
-		return getParam(OAuth.OAUTH_STATE);
-	}
-
 	public String getResponseType() {
 		return getParam(OAuth.OAUTH_RESPONSE_TYPE);
 	}

@@ -55,6 +55,10 @@ public abstract class OAuthTokenBaseRequest extends OAuthBaseRequest {
 		return getParam(OAuth.OAUTH_REFRESH_TOKEN);
 	}
 
+	/**
+	 * response_type : code, 中获得的code
+	 * @return
+	 */
 	public String getCode() {
 		return getParam(OAuth.OAUTH_CODE);
 	}
