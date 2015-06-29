@@ -15,7 +15,7 @@ import com.jfinal.kit.JsonKit;
  * @author BruceZCQ [zcq@zhucongqi.cn]
  * @version
  */
-public class JSONBodyParametersApplier implements OAuthParametersApplier {
+public class JSONBodyParametersApplier {
 
     public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params) {
         String json = JsonKit.toJson(params);

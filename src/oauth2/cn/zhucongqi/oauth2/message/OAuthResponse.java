@@ -6,13 +6,15 @@ package cn.zhucongqi.oauth2.message;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.jfinal.kit.StrKit;
 
 import cn.zhucongqi.oauth2.consts.OAuth;
 import cn.zhucongqi.oauth2.consts.OAuthError;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
 import cn.zhucongqi.oauth2.parameters.JSONBodyParametersApplier;
-import cn.zhucongqi.oauth2.parameters.OAuthParametersApplier;
 
 /**
  * 
@@ -36,12 +38,18 @@ public class OAuthResponse implements OAuthMessage {
         return new OAuthResponseBuilder(code);
     }
 
-    public static OAuthErrorResponseBuilder errorResponse(int code) {
-        return new OAuthErrorResponseBuilder(code);
+    public static OAuthErrorResponseBuilder errorResponse(int code, HttpServletRequest request) {
+        return new OAuthErrorResponseBuilder(code, request);
     }
     
-    public static OAuthErrorResponseBuilder errorBadReqResponse() {
-        return new OAuthErrorResponseBuilder(HttpServletResponse.SC_BAD_REQUEST);
+    public static OAuthErrorResponseBuilder errorUnAuthResponse(HttpServletRequest request) {
+    	OAuthErrorResponseBuilder errorRep =  new OAuthErrorResponseBuilder(HttpServletResponse.SC_UNAUTHORIZED, request);
+    	errorRep.setError(OAuthError.TokenResponse.UNAUTHORIZED_CLIENT);
+    	return errorRep;
+    }
+    
+    public static OAuthErrorResponseBuilder errorBadReqResponse(HttpServletRequest request) {
+        return new OAuthErrorResponseBuilder(HttpServletResponse.SC_BAD_REQUEST, request);
     }
 
     @Override
@@ -90,7 +98,7 @@ public class OAuthResponse implements OAuthMessage {
 
     public static class OAuthResponseBuilder {
 
-        protected OAuthParametersApplier applier;
+        protected JSONBodyParametersApplier applier;
         protected Map<String, Object> parameters = new HashMap<String, Object>();
         protected int responseCode;
         protected String location;
@@ -124,15 +132,25 @@ public class OAuthResponse implements OAuthMessage {
 
     public static class OAuthErrorResponseBuilder extends OAuthResponseBuilder {
 
-        public OAuthErrorResponseBuilder(int responseCode) {
+        public OAuthErrorResponseBuilder(int responseCode, HttpServletRequest request) {
             super(responseCode);
+            
+            String state = request.getParameter(OAuth.OAUTH_STATE);
+            if (StrKit.notBlank(state)){
+            	this.setState(state);
+            }else{
+            	this.setState(null);
+            }
+            
+            String errorUri = request.getParameter(OAuthError.OAUTH_ERROR_URI);
+            if (StrKit.notBlank(errorUri)) {
+				this.setErrorUri(errorUri);
+			}
         }
 
         public OAuthErrorResponseBuilder error(OAuthProblemException ex) {
             this.parameters.put(OAuthError.OAUTH_ERROR, ex.getError());
             this.parameters.put(OAuthError.OAUTH_ERROR_DESCRIPTION, ex.getDescription());
-            this.parameters.put(OAuthError.OAUTH_ERROR_URI, ex.getUri());
-            this.parameters.put(OAuth.OAUTH_STATE, ex.getState());
             return this;
         }
 

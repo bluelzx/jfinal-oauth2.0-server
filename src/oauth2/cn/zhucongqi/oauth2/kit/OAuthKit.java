@@ -146,7 +146,7 @@ public final class OAuthKit {
         return OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST)
             .description(message);
     }
-
+    
     /**
      * Creates OAuthProblemException that contains set of missing oauth parameters
      *
@@ -224,42 +224,6 @@ public final class OAuthKit {
         } catch (java.io.UnsupportedEncodingException wow) {
             throw new RuntimeException(wow.getMessage(), wow);
         }
-    }
-
-    /**
-     * Construct a &-separated list of the given values, percentEncoded.
-     */
-    public static String percentEncode(Iterable<?> values) {
-        StringBuilder p = new StringBuilder();
-        for (Object v : values) {
-            String stringValue = toString(v);
-            if (StrKit.notBlank(stringValue)) {
-                if (p.length() > 0) {
-                    p.append("&");
-                }
-                p.append(OAuthKit.percentEncode(toString(v)));
-            }
-        }
-        return p.toString();
-    }
-
-    public static String percentEncode(String s) {
-        if (s == null) {
-            return "";
-        }
-        try {
-            return URLEncoder.encode(s, ENCODING)
-                // OAuth encodes some characters differently:
-                .replace("+", "%20").replace("*", "%2A")
-                .replace("%7E", "~");
-            // This could be done faster with more hand-crafted code.
-        } catch (UnsupportedEncodingException wow) {
-            throw new RuntimeException(wow.getMessage(), wow);
-        }
-    }
-
-    private static final String toString(Object from) {
-        return (from == null) ? null : from.toString();
     }
 
     private static boolean isEmpty(Set<String> missingParams) {

@@ -84,13 +84,13 @@ public class OAuth2Service extends Service {
 				break;
 			}
 			this.controller.getResponse().setStatus(r.getResponseStatus());
-			this.controller.renderText(r.getBody());
+			this.controller.renderJson(r.getBody());
 		} catch (OAuthProblemException ex) {
 			OAuthResponse r = OAuthResponse
-					.errorBadReqResponse()
+					.errorBadReqResponse(this.controller.getRequest())
 					.error(ex).buildJSONMessage();
 			this.controller.getResponse().setStatus(r.getResponseStatus());
-			this.controller.renderText(r.getBody());
+			this.controller.renderJson(r.getBody());
 		}
 	}
 	
@@ -156,8 +156,11 @@ public class OAuth2Service extends Service {
 	 */
     private void notifyClientAuth() {
 		this.controller.getResponse().setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
-		this.controller.getResponse().addHeader(OAuth.HeaderType.WWW_AUTHENTICATE,"Basic realm=tt"); 
-		this.controller.renderNull();
+		this.controller.getResponse().addHeader(OAuth.HeaderType.WWW_AUTHENTICATE,"Basic realm=\"Authorization First!\""); 
+		OAuthResponse r = OAuthResponse
+				.errorUnAuthResponse(this.controller.getRequest()).setErrorDescription("UnAuthorization!Authorization First!").buildJSONMessage();
+		this.controller.getResponse().setStatus(r.getResponseStatus());
+		this.controller.renderJson(r.getBody());
     }
 	
     /**

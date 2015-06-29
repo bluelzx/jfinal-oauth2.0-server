@@ -10,8 +10,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.jfinal.kit.StrKit;
-
 import cn.zhucongqi.oauth2.base.validator.OAuthValidator;
 import cn.zhucongqi.oauth2.consts.OAuth;
 import cn.zhucongqi.oauth2.exception.OAuthProblemException;
@@ -38,27 +36,13 @@ public abstract class OAuthBaseRequest {
     public OAuthBaseRequest() {
     }
 
-    protected void validate() throws OAuthProblemException {
-        try {
-            validator = initValidator();
-            validator.validateMethod(request);
-            validator.validateContentType(request);
-            validator.validateRequiredParameters(request);
-            validator.validateClientAuthenticationCredentials(request);
-        } catch (OAuthProblemException e) {
-            try {
-                String redirectUri = request.getParameter(OAuth.OAUTH_REDIRECT_URI);
-                if (StrKit.notBlank(redirectUri)) {
-                    e.setRedirectUri(redirectUri);
-                }
-                e.state(this.getState());
-            } catch (Exception ex) {
-            }
-
-            throw e;
-        }
-
-    }
+	protected void validate() throws OAuthProblemException {
+		validator = initValidator();
+		validator.validateMethod(request);
+		validator.validateContentType(request);
+		validator.validateRequiredParameters(request);
+		validator.validateClientAuthenticationCredentials(request);
+	}
 
     protected abstract OAuthValidator<HttpServletRequest> initValidator() throws OAuthProblemException;
 

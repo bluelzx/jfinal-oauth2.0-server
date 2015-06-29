@@ -6,3 +6,5 @@ jfinal-oauth2.0-server
 参考[RFC6749](http://www.rfcreader.com/#rfc6749)
 
 实现了4.节描述的内容。
+
+demo [http://localhost:8080/jfinal-oauth2.0-server/index.jsp](http://localhost:8080/jfinal-oauth2.0-server/index.jsp)

@@ -22,10 +22,6 @@ public class OAuthProblemException extends IllegalArgumentException {
 	private static final long serialVersionUID = 1536483571040822380L;
 	private String error;
     private String description;
-    private String uri;
-    private String state;
-    private String scope;
-    private String redirectUri;
 
     private int responseStatus;
 
@@ -41,7 +37,6 @@ public class OAuthProblemException extends IllegalArgumentException {
         this.error = error;
     }
 
-
     public static OAuthProblemException error(String error) {
         return new OAuthProblemException(error);
     }
@@ -52,21 +47,6 @@ public class OAuthProblemException extends IllegalArgumentException {
 
     public OAuthProblemException description(String description) {
         this.description = description;
-        return this;
-    }
-
-    public OAuthProblemException uri(String uri) {
-        this.uri = uri;
-        return this;
-    }
-
-    public OAuthProblemException state(String state) {
-        this.state = state;
-        return this;
-    }
-
-    public OAuthProblemException scope(String scope) {
-        this.scope = scope;
         return this;
     }
 
@@ -88,18 +68,6 @@ public class OAuthProblemException extends IllegalArgumentException {
         return description;
     }
 
-    public String getUri() {
-        return uri;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getScope() {
-        return scope;
-    }
-
     public int getResponseStatus() {
         return responseStatus == 0 ? 400 : responseStatus;
     }
@@ -112,14 +80,6 @@ public class OAuthProblemException extends IllegalArgumentException {
         return parameters;
     }
 
-    public String getRedirectUri() {
-        return redirectUri;
-    }
-
-    public void setRedirectUri(String redirectUri) {
-        this.redirectUri = redirectUri;
-    }
-
     @Override
     public String getMessage() {
         StringBuilder b = new StringBuilder();
@@ -130,21 +90,6 @@ public class OAuthProblemException extends IllegalArgumentException {
         if (StrKit.notBlank(description)) {
             b.append(", ").append(description);
         }
-
-
-        if (StrKit.notBlank(uri)) {
-            b.append(", ").append(uri);
-        }
-
-
-        if (StrKit.notBlank(state)) {
-            b.append(", ").append(state);
-        }
-
-        if (StrKit.notBlank(scope)) {
-            b.append(", ").append(scope);
-        }
-
         return b.toString();
     }
 
@@ -153,10 +98,6 @@ public class OAuthProblemException extends IllegalArgumentException {
         return "OAuthProblemException{" +
                 "error='" + error + '\'' +
                 ", description='" + description + '\'' +
-                ", uri='" + uri + '\'' +
-                ", state='" + state + '\'' +
-                ", scope='" + scope + '\'' +
-                ", redirectUri='" + redirectUri + '\'' +
                 ", responseStatus=" + responseStatus +
                 ", parameters=" + parameters +
                 '}';
