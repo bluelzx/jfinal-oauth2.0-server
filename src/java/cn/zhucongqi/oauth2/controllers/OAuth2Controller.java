@@ -3,14 +3,12 @@
  */
 package cn.zhucongqi.oauth2.controllers;
 
-import cn.zhucongqi.oauth2.consts.ViewPaths;
 import cn.zhucongqi.oauth2.issuer.MD5Generator;
 import cn.zhucongqi.oauth2.request.RequestType;
 import cn.zhucongqi.oauth2.services.OAuth2Service;
 
 import com.jfinal.core.ActionKey;
 import com.jfinal.ext2.core.ControllerExt;
-import com.jfinal.ext2.kit.PageViewKit;
 
 /**
  * 
@@ -21,14 +19,6 @@ public class OAuth2Controller extends ControllerExt {
 	
 	private OAuth2Service _auth2Service;
 
-	public void tokenV() {
-		this.render(PageViewKit.getJSPPageViewFromWebInf(ViewPaths.AUTH_VIEW_PATH, "token"));
-	}
-	
-	public void passwordV() {
-		this.render(PageViewKit.getJSPPageViewFromWebInf(ViewPaths.AUTH_VIEW_PATH, "password"));
-	}
-	
 	private void codeTokenReqLinkToOAuthRequest() {
 		_auth2Service.setReqType(RequestType.CODE_TOKEN_REQUEST)
 				.setValGenerator(new MD5Generator()).doOAuthAction();
