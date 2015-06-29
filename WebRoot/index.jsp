@@ -10,7 +10,7 @@
 <title>JFinal-OAuth2.0</title>
 </head>
 <body>
-<a href="<%=cxt%>/oauth2/tokenv">Token</a>
-<a href="<%=cxt%>/oauth2/passwordv">Password</a>
+<a href="<%=cxt%>/oauth/token.jsp">Token</a>
+<a href="<%=cxt%>/oauth/password.jsp">Password</a>
 </body>
 </html>

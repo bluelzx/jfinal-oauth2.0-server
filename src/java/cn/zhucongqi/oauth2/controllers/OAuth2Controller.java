@@ -21,15 +21,6 @@ public class OAuth2Controller extends ControllerExt {
 	
 	private OAuth2Service _auth2Service;
 
-	// 首页
-	public void index(){
-		this.indexV();
-	}
-	
-	private void indexV(){
-		this.render(PageViewKit.getJSPPageViewFromWebInf("index"));
-	}
-	
 	public void tokenV() {
 		this.render(PageViewKit.getJSPPageViewFromWebInf(ViewPaths.AUTH_VIEW_PATH, "token"));
 	}
