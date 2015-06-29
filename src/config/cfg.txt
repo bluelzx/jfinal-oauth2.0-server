@@ -27,4 +27,4 @@ dev = true
 # 文件上传的保存路径
 savebasedir = /var/upload
 # webapp的名称
-webappname = 
+webappname = jfinal-oauth2.0-server
