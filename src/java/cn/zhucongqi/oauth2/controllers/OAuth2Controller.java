@@ -88,5 +88,11 @@ public class OAuth2Controller extends ControllerExt {
 	public void onRefreshToken() {	
 		this.grantReqLinkToOAuthGrantRequest();
 	}
+
+	@Override
+	public void onExceptionError(Exception e) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

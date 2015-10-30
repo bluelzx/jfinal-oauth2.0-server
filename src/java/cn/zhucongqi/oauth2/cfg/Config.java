@@ -40,7 +40,7 @@ public class Config extends JFinalConfigExt {
 	}
 
 	@Override
-	public void configTablesMapping(ActiveRecordPlugin arp) {
+	public void configTablesMapping(String configName, ActiveRecordPlugin arp) {
 		// 关联数据库表
 	}
 
@@ -53,5 +53,4 @@ public class Config extends JFinalConfigExt {
 	public void configMoreHandlers(Handlers me) {
 		
 	}
-
 }
