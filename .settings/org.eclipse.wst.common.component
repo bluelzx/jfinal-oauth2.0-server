@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ikaihuo_web_template">
+    <wb-module deploy-name="jfinal-oauth2.0-server">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/config"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/testing"/>
