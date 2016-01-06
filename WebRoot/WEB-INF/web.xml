@@ -23,14 +23,14 @@
   </filter-mapping>
   <error-page>
     <error-code>403</error-code>
-    <location>/WEB-INF/errorpages/403.html</location>
+    <location>/WEB-INF/errorpages/403.jsp</location>
   </error-page>
   <error-page>
     <error-code>404</error-code>
-    <location>/WEB-INF/errorpages/404.html</location>
+    <location>/WEB-INF/errorpages/404.jsp</location>
   </error-page>
   <error-page>
     <error-code>500</error-code>
-    <location>/WEB-INF/errorpages/500.html</location>
+    <location>/WEB-INF/errorpages/500.jsp</location>
   </error-page>
 </web-app>
