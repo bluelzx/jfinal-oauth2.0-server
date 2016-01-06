@@ -1,7 +1,7 @@
 # jfinal-oauth2.0-server
 jfinal-oauth2.0-server
 
-基于[JFinal2.0](https://github.com/JFinal/JFinal)，[JFinal-ext2-1.0](https://github.com/BruceZCQ/JFinal-ext2)，[JFianl-ext-3.1.4](https://github.com/b1412/jfinal-ext)
+基于[JFinal2.1](https://github.com/JFinal/JFinal)，[JFinal-ext2-v2.0.1](https://github.com/BruceZCQ/JFinal-ext2)
 
 参考[RFC6749](http://www.rfcreader.com/#rfc6749)
 
