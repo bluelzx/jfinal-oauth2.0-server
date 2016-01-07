@@ -5,6 +5,26 @@
 	<artifactId>jfinal-oauth2.0-server</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
+	<url>http://openingo.github.io/jfinal-oauth2.0-server/</url>
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>BruceZCQ</name>
+			<email>zcq@zhucongqi.cn</email>
+			<organization>OpeningO Co.,Ltd.</organization>
+			<organizationUrl>http://openingo.github.io/</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:git@github.com:OpeningO/jfinal-oauth2.0-server.git</connection>
+		<developerConnection>scm:git:git@github.com:OpeningO/jfinal-oauth2.0-server.git</developerConnection>
+		<url>git@github.com:OpeningO/jfinal-oauth2.0-server.git</url>
+	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>com.jfinal</groupId>
