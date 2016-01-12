@@ -41,6 +41,7 @@ ge.model.package=cn.zhucongqi.oauth2.models
 # 4. app.name: app's name;
 #---------------------------------------------------------------------------------#
 app.dev = true
-app.upload.basedir = /var/uploads
+app.uploads.basedir = /var/uploads
+app.downloads.basedir = /var/downloads
 app.post = true
 app.name = jfinal-oauth2
